@@ -1,0 +1,18 @@
+apt update -y
+apt install curl wget gnupg2 apt-transport-https -y
+wget -qO /usr/share/keyrings/matrix-org-archive-keyring.gpg https://packages.matrix.org/debian/matrix-org-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/matrix-org-archive-keyring.gpg] https://packages.matrix.org/debian/ $(lsb_release -cs) main" | tee /etc/apt/sources.list.d/matrix-org.list
+apt-get update -y
+apt-get install matrix-synapse-py3 -y
+systemctl start matrix-synapse
+systemctl enable matrix-synapse
+
+----------shared secret config
+cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1
+123qwe123 (z.B.)
+
+apt-get install nginx -y
+nano /etc/matrix-synapse/homeserver.yaml
+nano /etc/nginx/conf.d/matrix.conf
+nginx -t
+
