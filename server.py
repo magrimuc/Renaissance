@@ -2,7 +2,7 @@ import socket
 import datetime
 
 startpoint = datetime.datetime.now();
-while(startpoint  + datetime.timedelta(minutes=1)> datetime.datetime.now()):
+while(startpoint  + datetime.timedelta(minutes=59)> datetime.datetime.now()):
 {
     # Initialize Socket Instance
     sock = socket.socket()
