@@ -1,41 +1,46 @@
 import socket
+import datetime
 
-# Initialize Socket Instance
-sock = socket.socket()
-print ("Socket created successfully.")
+startpoint = datetime.datetime.now();
+while(startpoint  + datetime.timedelta(minutes=1)> datetime.datetime.now()):
+{
+    # Initialize Socket Instance
+    sock = socket.socket()
+    print ("Socket created successfully.")
 
-# Defining port and host
-port = 8800
-host = 'mgrillo.de'
+    # Defining port and host
+    port = 8800
+    host = 'mgrillo.de'
 
-# binding to the host and port
-sock.bind((host, port))
+    # binding to the host and port
+    sock.bind((host, port))
 
-# Accepts up to 10 connections
-sock.listen(10)
-print('Socket is listening...')
+    # Accepts up to 10 connections
+    sock.listen(10)
+    print('Socket is listening...')
 
-while True:
-    # Establish connection with the clients.
-    con, addr = sock.accept()
-    print('Connected with ', addr)
+    while True:
+        # Establish connection with the clients.
+        con, addr = sock.accept()
+        print('Connected with ', addr)
 
-    # Get data from the client
-    #data = con.recv(1024)
-    #print(data.decode())
-    
-    # joho read
-    file = open('sfile.txt', 'wb')
+        # Get data from the client
+        #data = con.recv(1024)
+        #print(data.decode())
 
-# joho send to server
-    line = con.recv(1024)
+        # joho read
+        file = open('sfile.txt', 'wb')
 
-# joho move upwards
-    while(line):
-        file.write(line)
+    # joho send to server
         line = con.recv(1024)
-    
-    file.close()
-    print('File has been transferred successfully.')
 
-    con.close()
+    # joho move upwards
+        while(line):
+            file.write(line)
+            line = con.recv(1024)
+
+        file.close()
+        print('File has been transferred successfully.')
+
+        con.close()
+}
